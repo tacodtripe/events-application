@@ -27,3 +27,20 @@
 <br>
 
 <%= link_to 'New Event', new_event_path %>
+
+<br>
+
+<% if user_signed_in? %>
+  <h1>
+  Events confirmed to attend:
+  </h1>
+  <div>
+    <% Event.all.each do |event| %>
+      <% if current_user.id == event.user_id %>
+        <p>
+          - <%= event.title %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
