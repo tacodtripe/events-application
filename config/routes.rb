@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :events
+  resources :events do
+    resources :attendances, shallow: true
+  end
   root "events#index"
 
 end
