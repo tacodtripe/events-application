@@ -1,69 +1,52 @@
 class AttendancesController < ApplicationController
-  before_action :set_attendance, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_event
+  before_action :set_attendance, only: [:show, :edit, :update, :destroy]
 
-  # GET /attendances or /attendances.json
   def index
-    @attendances = Attendance.all
+    @attendances = @event.attendances
   end
 
-  # GET /attendances/1 or /attendances/1.json
   def show
   end
 
-  # GET /attendances/new
   def new
-    @attendance = Attendance.new
+    @attendance = @event.attendances.build
   end
 
-  # GET /attendances/1/edit
-  def edit
-  end
-
-  # POST /attendances or /attendances.json
   def create
-    @attendance = Attendance.new(attendance_params)
+    @attendance = @event.attendances.build(attendance_params)
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to @attendance, notice: "Attendance was successfully created." }
+        format.html { redirect_to root_path,
+notice: 'Attendance was successfully created.' }
         format.json { render :show, status: :created, location: @attendance }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        format.json { render json: @attendance.errors, status: :unprocessable_
+entity }
       end
     end
   end
 
-  # PATCH/PUT /attendances/1 or /attendances/1.json
-  def update
-    respond_to do |format|
-      if @attendance.update(attendance_params)
-        format.html { redirect_to @attendance, notice: "Attendance was successfully updated." }
-        format.json { render :show, status: :ok, location: @attendance }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /attendances/1 or /attendances/1.json
   def destroy
     @attendance.destroy
-    respond_to do |format|
-      format.html { redirect_to attendances_url, notice: "Attendance was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to root_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
+
     def set_attendance
-      @attendance = Attendance.find(params[:id])
+      @attendance = @event.attendances.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def attendance_params
-      params.require(:attendance).permit(:attendee, :event_to_attend)
+      params.require(:attendance).permit(:attendee_id, :event_to_attend_id)
     end
 end

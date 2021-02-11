@@ -10,5 +10,9 @@
   <%= @event.title %>
 </p>
 
+<p>
+  <%= link_to 'Confirm attendance', new_event_attendance_path(@event) %>
+</p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

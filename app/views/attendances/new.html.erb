@@ -1,5 +1,28 @@
-<h1>New Attendance</h1>
 
-<%= render 'form', attendance: @attendance %>
+<%= form_with(model: [@event, @attendance], local: true) do |form| %>
+  <% if @attendance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
 
-<%= link_to 'Back', attendances_path %>
+      <ul>
+        <% @attendance.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :event_to_attend_id %>
+    <%= form.text_field :event_to_attend, value: @event.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :attendee_id %>
+    <%= form.text_field :attendee_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

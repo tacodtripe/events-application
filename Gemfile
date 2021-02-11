@@ -30,6 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Flexible authentication solution for Rails with Warden
 gem 'devise', '~> 4.7', '>= 4.7.3'
+# Forms made easy!
+gem 'simple_form', '~> 5.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
