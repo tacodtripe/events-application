@@ -13,13 +13,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :event_to_attend_id %>
-    <%= form.text_field :event_to_attend, value: @event.id %>
+    <h3>
+      <%= form.label :event_to_attend_id %>
+    </h3>
+    <p>
+      <%= @event.title %>
+    </p>
+    <%= form.hidden_field :event_to_attend, value: @event.id %>
   </div>
 
   <div class="field">
-    <%= form.label :attendee_id %>
-    <%= form.text_field :attendee_id, value: current_user.id %>
+    <h3>
+      <%= form.label :attendee_id %>
+    </h3>
+    <p>
+      <%= current_user.username %>
+    </p>
+    <%= form.hidden_field :attendee_id, value: current_user.id %>
   </div>
 
   <div class="actions">

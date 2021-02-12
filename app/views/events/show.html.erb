@@ -10,6 +10,40 @@
   <%= @event.title %>
 </p>
 
+<!--
+<% if user_signed_in? %>
+  <h2>
+    List of confirmed attendees
+  </h2>
+  <ul>
+     <% @event.attendances.each do |f|%>
+      <% if current_user.id == f.attendee_id && @event.id == f.event_to_attend_id %>
+        <li>
+          <p>
+            <%= current_user.username %>
+          </p>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+-->
+
+<h2>
+  Confirmed attendees
+</h2>
+<ul>
+    <% Attendance.all.each do |f| %>
+      <!-- <%= User.find_by(id: "#{f.attendee_id}")[:username] %> -->
+      <% if @event.id == f.event_to_attend_id %>
+        <li>
+          <%= User.find_by(id: "#{f.attendee_id}")[:username] %>
+        </li>
+      <% end %>
+    <% end %>
+</ul>
+
+
 <p>
   <%= link_to 'Confirm attendance', new_event_attendance_path(@event) %>
 </p>

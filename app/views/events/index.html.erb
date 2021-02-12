@@ -32,15 +32,17 @@
 
 <% if user_signed_in? %>
   <h1>
-  Events confirmed to attend:
+    Events confirmed to attend:
   </h1>
   <div>
-    <% Event.all.each do |event| %>
-      <% if current_user.id == event.user_id %>
-        <p>
-          - <%= event.title %>
-        </p>
-      <% end %>
+    <% Attendance.all.each do |f| %>
+      <ul>
+        <% if current_user.id == f.attendee_id %>
+          <li>
+            <%= Event.find_by(id: "#{f.event_to_attend_id}")[:title] %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
   </div>
 <% end %>
