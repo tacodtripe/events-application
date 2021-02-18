@@ -1,14 +1,13 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event
-  before_action :set_attendance, only: [:show, :edit, :update, :destroy]
+  before_action :set_attendance, only: %i[show edit update destroy]
 
   def index
     @attendances = @event.attendances
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @attendance = @event.attendances.build
@@ -19,13 +18,17 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to root_path,
-notice: 'Attendance was successfully created.' }
+        format.html do
+          redirect_to root_path,
+                      notice: 'Attendance was successfully created.'
+        end
         format.json { render :show, status: :created, location: @attendance }
       else
         format.html { render :new }
-        format.json { render json: @attendance.errors, status: :unprocessable_
-entity }
+        format.json do
+          render json: @attendance.errors, status: :unprocessable_
+          entity
+        end
       end
     end
   end
@@ -37,16 +40,16 @@ entity }
 
   private
 
-    def set_event
-      @event = Event.find(params[:event_id])
-    end
+  def set_event
+    @event = Event.find(params[:event_id])
+  end
 
-    def set_attendance
-      @attendance = @event.attendances.find(params[:id])
-    end
+  def set_attendance
+    @attendance = @event.attendances.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def attendance_params
-      params.require(:attendance).permit(:attendee_id, :event_to_attend_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def attendance_params
+    params.require(:attendance).permit(:attendee_id, :event_to_attend_id)
+  end
 end
