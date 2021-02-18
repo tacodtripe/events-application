@@ -36,9 +36,9 @@
   </h1>
   <div>
     <ul>
-      <% Attendance.all.each do |f| %>
-        <% unless attend_confirmed(f).nil? %>
-          <li><%= attend_confirmed(f) %></li>
+      <% Attendance.all.each do |event| %>
+        <% unless attend_confirmed(event).nil? %>
+          <li><%= attend_confirmed(event)[:title] %></li>
         <% end %>
       <% end %>
     </ul>

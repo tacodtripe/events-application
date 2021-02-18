@@ -19,13 +19,7 @@
   Confirmed attendees
 </h2>
 
-<% Attendance.all.each do |f| %>
-    <% if @event.id == f.event_to_attend_id %>
-      <% @v = User.find_by(id: "#{f.attendee_id}")[:username]%>
-      <% @attendance_list << @v %>
-      <% @v = ''%>
-    <% end %>
-<% end %>
+<% attendance_fill %>
 
 <ul>
   <% @attendance_list.each do |r| %>
@@ -36,13 +30,9 @@
 </ul>
 
 <% if user_signed_in? %>
-  <% unless @attendance_list.include?(current_user.username) %>
     <p>
-      <%= link_to 'Confirm attendance', new_event_attendance_path(@event) %>
+      <%= attendance_confirm %>
     </p>
-  <% else %>
-    <%= link_to 'Cancel attendance', new_event_attendance_path(@event) %>
-  <% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
