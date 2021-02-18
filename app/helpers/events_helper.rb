@@ -8,4 +8,8 @@ module EventsHelper
 
     link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
   end
+
+  def attend_confirmed(event)
+    Event.find_by(id: event.event_to_attend_id.to_s)[:title] if current_user.id == event.attendee_id
+  end
 end

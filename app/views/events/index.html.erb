@@ -35,14 +35,12 @@
     Events confirmed to attend:
   </h1>
   <div>
-    <% Attendance.all.each do |f| %>
-      <ul>
-        <% if current_user.id == f.attendee_id %>
-          <li>
-            <%= Event.find_by(id: "#{f.event_to_attend_id}")[:title] %>
-          </li>
+    <ul>
+      <% Attendance.all.each do |f| %>
+        <% unless attend_confirmed(f).nil? %>
+          <li><%= attend_confirmed(f) %></li>
         <% end %>
-      </ul>
-    <% end %>
+      <% end %>
+    </ul>
   </div>
 <% end %>
