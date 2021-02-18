@@ -9,6 +9,7 @@ AllCops:
     - "test/**/*"
 
   DisplayCopNames: true
+  NewCops: enable
 
 Layout/LineLength:
   Max: 120
