@@ -9,6 +9,7 @@ module EventsHelper
     link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
   end
 
+  # rubocop:disable Lint/UselessAssignment
   def event_attendance_confirmed(event)
     event_attendances = Attendance.where(event_to_attend_id: event.id)
     event_attendances.each do |attendance|
@@ -16,6 +17,7 @@ module EventsHelper
     end
     event_attendances = ''
   end
+  # rubocop:enable Lint/UselessAssignment
 
   def attendance_fill
     Attendance.all.each do |attendee|
