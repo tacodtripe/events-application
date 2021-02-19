@@ -9,10 +9,12 @@ module EventsHelper
     link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
   end
 
-  def attend_confirmed(event)
-    return unless current_user.id == event.attendee_id
-
-    Event.find_by(id: event.event_to_attend_id.to_s)
+  def event_attendance_confirmed(event)
+    event_attendances = Attendance.where(event_to_attend_id: event.id)
+    event_attendances.each do |attendance|
+      return event.title if attendance.attendee_id == current_user.id
+    end
+    event_attendances = ''
   end
 
   def attendance_fill

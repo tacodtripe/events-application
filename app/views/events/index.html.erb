@@ -12,13 +12,33 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @upcoming_events.each do |event| %>
       <tr>
         <td><%= event.start %></td>
         <td><%= event.title %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= edit_event(event) %></td>
         <td><%= delete_event(event) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Finished at</th>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @past_events.each do |event| %>
+      <tr>
+        <td><%= event.start %></td>
+        <td><%= event.title %></td>
+        <td><%= link_to 'Show', event %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,13 +52,30 @@
 
 <% if user_signed_in? %>
   <h1>
-    Events confirmed to attend:
+    Future events confirmed to attend:
   </h1>
   <div>
     <ul>
-      <% Attendance.all.each do |event| %>
-        <% unless attend_confirmed(event).nil? %>
-          <li><%= attend_confirmed(event)[:title] %></li>
+      <% @upcoming_events.each do |event| %>
+        <% unless event_attendance_confirmed(event).empty? %>
+          <li>
+            <%= event_attendance_confirmed(event) %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <h1>
+    Past events attended:
+  </h1>
+  <div>
+    <ul>
+      <% @past_events.each do |event| %>
+        <% unless event_attendance_confirmed(event).empty? %>
+          <li>
+            <%= event_attendance_confirmed(event) %>
+          </li>
         <% end %>
       <% end %>
     </ul>
