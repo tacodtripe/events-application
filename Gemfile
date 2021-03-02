@@ -32,6 +32,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise', '~> 4.7', '>= 4.7.3'
 # Forms made easy!
 gem 'simple_form', '~> 5.1'
+gem 'factory_bot_rails', '~> 6.1'
+gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
+gem 'pry-rails', :group => :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,9 +55,6 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
