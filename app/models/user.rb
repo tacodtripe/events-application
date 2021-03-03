@@ -8,4 +8,7 @@ class User < ApplicationRecord
   has_many :attended_events, through: :attendances, source: :event_to_attend_id
 
   has_many :events, dependent: :destroy
+
+  validates_presence_of :username
+  validates_uniqueness_of :username
 end
