@@ -9,11 +9,13 @@
 ## Instructions to use the web application
 1. Clone the repository to your local machine.
 
-2. `cd` inside the 'private-events' folder
+2. Open a terminal insite the repository folder
 
-3. Go to terminal and run `rails server`
+3. run `bundle install` at your terminal to make sure you install al the gems needed
 
-4. Open your web browser to use the provided url
+4. When eveything is installed now run `rails server` and you will provided a local url
+
+5. Open your web browser to use the provided url and enjoy :)
 
 ## Author
 
