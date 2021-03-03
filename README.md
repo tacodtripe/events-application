@@ -11,7 +11,8 @@
 
 2. Open a terminal insite the repository folder
 
-3. run `bundle install` at your terminal to make sure you install al the gems needed
+
+3. run `bundle install`, `rails db:create`, `rails db:migrate` at your terminal to make sure set up all the needs
 
 4. When eveything is installed now run `rails server` and you will provided a local url
 

@@ -6,8 +6,10 @@ AllCops:
     - "node_modules/**/*"
     - "bin/**/*"
     - "config/**/*"
+    - "test/**/*"
 
   DisplayCopNames: true
+  NewCops: enable
 
 Layout/LineLength:
   Max: 120

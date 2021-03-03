@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @event.start %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= User.find_by(id: @event.user_id)[:username] %>
+</p>
+
+<h2>
+  Confirmed attendees
+</h2>
+
+<% attendance_fill %>
+
+<ul>
+  <% @attendance_list.each do |r| %>
+    <li>
+      <%= r %>
+    </li>
+  <% end %>
+</ul>
+
+<% if user_signed_in? %>
+    <p>
+      <%= attendance_confirm %>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
